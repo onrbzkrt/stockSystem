@@ -45,6 +45,7 @@ class HomeController extends Controller
                     ->orWhere('stocks.exchange', 'like', '%' . $request->search . '%');
             })
             /* TODO: yukarida bahsettigim where burasi ama burada da veri bos gelince sikinti cikariyor, kontrol et */
+
             ->where(function ($query) use ($request) {
                 if (isset($request->filter))
                 {
