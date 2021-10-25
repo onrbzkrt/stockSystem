@@ -8,7 +8,7 @@
 
                     <table class="table" id="table" data-locale="en-EN" data-toolbar=".toolbar" data-search="false"
                            data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-pagination="true"
-                           data-resizable="true" data-sortable="true" data-show-search-clear-button="true" data-page-size=100 data-filter-control="true"
+                           data-resizable="true" data-sortable="true" data-show-search-clear-button="false" data-page-size=100 data-filter-control="true"
                            data-side-pagination="server" data-url="{{ url('getList') }}">
                         <thead>
 

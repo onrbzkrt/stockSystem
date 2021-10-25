@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Stocks;
 use App\Models\stockScreener15min;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class HomeController extends Controller
 {
@@ -30,6 +32,25 @@ class HomeController extends Controller
                     ->orWhere('stocks.symbol', 'like', '%' . $request->search . '%')
                     ->orWhere('stocks.name', 'like', '%' . $request->search . '%');
             })
+            ->where(function ($query) use ($request) {
+                if (isset($request->filter))
+                {
+                    $filterForCount =  json_decode($request->filter);
+                    foreach ($filterForCount as $key => $rf)
+                    {
+                        if ($key != 'exchange')
+                        {
+                            $query
+                                ->where('stocks.'.$key, 'like', '%' . $rf . '%');
+                        }
+                        else
+                        {
+                            $query
+                                ->where('stocks.'.$key, '=', $rf);
+                        }
+                    }
+                }
+            })
             ->get()
             ->count();
 
@@ -49,8 +70,8 @@ class HomeController extends Controller
             ->where(function ($query) use ($request) {
                 if (isset($request->filter))
                 {
-                    $request->filter =  json_decode($request->filter);
-                    foreach ($request->filter as $key => $rf)
+                    $filterForData =  json_decode($request->filter);
+                    foreach ($filterForData as $key => $rf)
                     {
                         if ($key != 'exchange')
                         {
@@ -66,8 +87,6 @@ class HomeController extends Controller
                 }
             })
             ->get();
-
-
 
         $data['rows'] = $query;
         $data['total'] = $total;
