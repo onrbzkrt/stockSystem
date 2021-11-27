@@ -86,6 +86,10 @@ function arraySortConf($val)
         31 => 'country',
         32 => 'sector',
         33 => 'industry',
+        34 => 'close'.$val,
+        35 => 'earnings_per_share_basic_ttm',
+        36 => 'market_cap_basic',
+        37 => 'price_earnings_ttm',
     );
 }
 
@@ -126,6 +130,10 @@ function arraySort()
         31 => 'country',
         32 => 'sector',
         33 => 'industry',
+        34 => 'close|1',
+        35 => 'earnings_per_share_basic_ttm',
+        36 => 'market_cap_basic',
+        37 => 'price_earnings_ttm',
     );
 }
 
@@ -502,4 +510,25 @@ function descriptionUpdate($symbol, $id)
                 ]
             );
     }
+}
+
+function thousandsCurrencyFormat($num) {
+
+    if($num>1000) {
+
+        $x = round($num);
+        $x_number_format = number_format($x);
+        $x_array = explode(',', $x_number_format);
+        $x_parts = array('K', 'M', 'B', 'T');
+        $x_count_parts = count($x_array) - 1;
+        $x_display = $x;
+        // TODO: Sorun cikarsa sonraki [1]'i kaldir
+        $x_display = $x_array[0] . ((int) $x_array[1][0] !== 0 ? '.' . $x_array[1][0].$x_array[1][1] : '');
+        $x_display .= $x_parts[$x_count_parts - 1];
+
+        return $x_display;
+
+    }
+
+    return $num;
 }

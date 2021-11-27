@@ -31,3 +31,7 @@ Route::get('/descriptionUpdate', 'App\Http\Controllers\IndexController@descripti
 /* HomePage */
 Route::get('/', 'App\Http\Controllers\HomeController@index');
 Route::get('/getList', 'App\Http\Controllers\HomeController@ajax_stock_POST');
+
+/* Stock Detail */
+Route::get('/stock/{symbol}', 'App\Http\Controllers\StockController@specificStock');
+Route::get('/stock/socket/{symbol}', 'App\Http\Controllers\StockController@specificStockSocket');

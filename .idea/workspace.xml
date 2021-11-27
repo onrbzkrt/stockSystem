@@ -7,7 +7,7 @@
     <list default="true" id="d8b0a37b-85fb-4e02-9654-c42e6fc136ab" name="Default Changelist" comment="Bootstrap-table'a filtreleme eklendi ve Laravel MIX kullanildi. Table filtremesinde sorun var, kontrol edilecek">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Stocks.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Stocks.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/homepage.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/homepage.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -173,11 +173,11 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="TODO_SCOPE" value="Module 'firstProjectInUSA'" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../estore" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="php.override.implement.member.chooser.php.doc" value="NONE" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="editing.templates" />
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\PhpStorm 2021.1.1\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -207,7 +207,10 @@
       <workItem from="1634142174598" duration="79759000" />
       <workItem from="1634784770453" duration="24298000" />
       <workItem from="1635057115827" duration="37875000" />
-      <workItem from="1635198259697" duration="4602000" />
+      <workItem from="1635198259697" duration="16851000" />
+      <workItem from="1635645756068" duration="1381000" />
+      <workItem from="1635650902256" duration="20000" />
+      <workItem from="1635650924214" duration="4557000" />
     </task>
     <servers />
   </component>

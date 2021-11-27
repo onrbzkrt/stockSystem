@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\StockBase;
 use App\Models\Stocks;
 
 use App\Models\stockScreener1min;
@@ -26,8 +27,6 @@ class IndexController extends Controller
 
     public function getTraidingView($timer)
     {
-//        dd($id);
-
         $timeInterval =
             [
                 "1min"  =>  "|1",
@@ -55,7 +54,6 @@ class IndexController extends Controller
         $response = Http::withBody(
             $jsonParse, 'raw'
         )->get('https://scanner.tradingview.com/america/scan');
-
 
         $getBody = $response->body();
 
@@ -135,6 +133,40 @@ class IndexController extends Controller
 
                     $stocksScreen->save();
 
+                }
+
+                //TODO: StockBase Changed on Just 1 Min Update
+                if ($selectedTime == "|1")
+                {
+                    $stockBaseCheck = StockBase::where("stockID", $stockID)
+                        ->first();
+
+                    if (isset($stockBaseCheck) && !empty($stockBaseCheck) && $stockBaseCheck != null)
+                    {
+                        StockBase::where("stockID", $stockID)
+                            ->update(
+                                [
+                                    "stockID" => $stockID,
+                                    "marketClose" => isset($data[findRowsNumber('close'.$selectedTime, $selectedTime)]) && !empty($data[findRowsNumber('close'.$selectedTime, $selectedTime)]) ? $data[findRowsNumber('close'.$selectedTime, $selectedTime)] : null,
+                                    "marketCap" => isset($data[findRowsNumber('market_cap_basic', $selectedTime)]) && !empty($data[findRowsNumber('market_cap_basic', $selectedTime)]) ? $data[findRowsNumber('market_cap_basic', $selectedTime)] : null,
+                                    "EPS" => isset($data[findRowsNumber('earnings_per_share_basic_ttm', $selectedTime)]) && !empty($data[findRowsNumber('earnings_per_share_basic_ttm', $selectedTime)]) ? $data[findRowsNumber('earnings_per_share_basic_ttm', $selectedTime)] : null,
+                                    "PE" => isset($data[findRowsNumber('price_earnings_ttm', $selectedTime)]) && !empty($data[findRowsNumber('price_earnings_ttm', $selectedTime)]) ? $data[findRowsNumber('price_earnings_ttm', $selectedTime)] : null,
+                                ]
+                            );
+                    }
+                    else
+                    {
+                        $stockBase = new StockBase();
+
+                        $stockBase->stockID = $stockID;
+                        $stockBase->marketClose = isset($data[findRowsNumber('close'.$selectedTime, $selectedTime)]) && !empty($data[findRowsNumber('close'.$selectedTime, $selectedTime)]) ? $data[findRowsNumber('close'.$selectedTime, $selectedTime)] : null;
+                        $stockBase->marketCap = isset($data[findRowsNumber('market_cap_basic', $selectedTime)]) && !empty($data[findRowsNumber('market_cap_basic', $selectedTime)]) ? $data[findRowsNumber('market_cap_basic', $selectedTime)] : null;
+                        $stockBase->EPS = isset($data[findRowsNumber('earnings_per_share_basic_ttm', $selectedTime)]) && !empty($data[findRowsNumber('earnings_per_share_basic_ttm', $selectedTime)]) ? $data[findRowsNumber('earnings_per_share_basic_ttm', $selectedTime)] : null;
+                        $stockBase->PE = isset($data[findRowsNumber('price_earnings_ttm', $selectedTime)]) && !empty($data[findRowsNumber('price_earnings_ttm', $selectedTime)]) ? $data[findRowsNumber('price_earnings_ttm', $selectedTime)] : null;
+
+                        $stockBase->save();
+
+                    }
                 }
             }
         }
